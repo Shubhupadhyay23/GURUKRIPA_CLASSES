@@ -55,11 +55,17 @@ export default function Index() {
         setFormData({ name: "", email: "", phone: "", program: "" });
         setTimeout(() => setSubmitSuccess(false), 3000);
       } else {
-        alert("Error submitting inquiry. Please try again.");
+        const errorMsg =
+          result.error instanceof Error
+            ? result.error.message
+            : JSON.stringify(result.error);
+        console.error("Supabase Error Details:", errorMsg);
+        alert(`Error: ${errorMsg || "Failed to submit inquiry. Please try again."}`);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error submitting form");
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      console.error("Full Error:", error);
+      alert(`Error: ${errorMsg}`);
     } finally {
       setIsSubmitting(false);
     }
