@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Phone, MapPin, Users, BookOpen, Award, ArrowRight, Zap } from "lucide-react";
+import { Phone, MapPin, Users, BookOpen, Award, ArrowRight, Zap, Check } from "lucide-react";
 import { useEffect, useState } from "react";
+import { submitInquiry, submitEnrollment } from "@/lib/supabase";
 
 export default function Index() {
   const [isVisible, setIsVisible] = useState(false);
