@@ -6,10 +6,48 @@ import { submitInquiry, submitEnrollment } from "@/lib/supabase";
 export default function Index() {
   const [isVisible, setIsVisible] = useState(false);
   const [programsVisible, setProgramsVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    program: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone || !formData.program) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await submitInquiry(formData);
+      if (result.success) {
+        setSubmitSuccess(true);
+        setFormData({ name: "", email: "", phone: "", program: "" });
+        setTimeout(() => setSubmitSuccess(false), 3000);
+      } else {
+        alert("Error submitting inquiry. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error submitting form");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const programs = [
     { name: "RAS", icon: "📚", color: "from-blue-500 to-cyan-500", delay: 0 },
