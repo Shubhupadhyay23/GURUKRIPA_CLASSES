@@ -60,7 +60,9 @@ export default function Index() {
             ? result.error.message
             : JSON.stringify(result.error);
         console.error("Supabase Error Details:", errorMsg);
-        alert(`Error: ${errorMsg || "Failed to submit inquiry. Please try again."}`);
+        alert(
+          `Error: ${errorMsg || "Failed to submit inquiry. Please try again."}`,
+        );
       }
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);
