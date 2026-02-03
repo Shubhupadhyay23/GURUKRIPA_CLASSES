@@ -39,9 +39,17 @@ export type Enrollment = {
 
 // Submit inquiry
 export const submitInquiry = async (inquiry: Inquiry) => {
+  console.log("📝 Submitting inquiry...", inquiry);
+  console.log("✅ Supabase configured:", !!supabase);
+  console.log("🔑 Supabase URL:", supabaseUrl ? "Set" : "NOT SET");
+  console.log("🔑 Supabase Key:", supabaseAnonKey ? "Set" : "NOT SET");
+
   if (!supabase) {
-    console.warn("Supabase not configured");
-    return { success: false, error: new Error("Supabase not configured") };
+    const error = new Error(
+      "❌ Supabase not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.",
+    );
+    console.error(error);
+    return { success: false, error };
   }
 
   try {
@@ -50,10 +58,15 @@ export const submitInquiry = async (inquiry: Inquiry) => {
       .insert([inquiry])
       .select();
 
-    if (error) throw error;
+    if (error) {
+      console.error("❌ Supabase Insert Error:", error);
+      throw error;
+    }
+
+    console.log("✅ Inquiry submitted successfully:", data);
     return { success: true, data };
   } catch (error) {
-    console.error("Error submitting inquiry:", error);
+    console.error("❌ Error submitting inquiry:", error);
     return { success: false, error };
   }
 };
