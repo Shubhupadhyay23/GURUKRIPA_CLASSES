@@ -37,6 +37,11 @@ export type Enrollment = {
 
 // Submit inquiry
 export const submitInquiry = async (inquiry: Inquiry) => {
+  if (!supabase) {
+    console.warn("Supabase not configured");
+    return { success: false, error: new Error("Supabase not configured") };
+  }
+
   try {
     const { data, error } = await supabase
       .from("inquiries")
@@ -53,6 +58,11 @@ export const submitInquiry = async (inquiry: Inquiry) => {
 
 // Submit enrollment
 export const submitEnrollment = async (enrollment: Enrollment) => {
+  if (!supabase) {
+    console.warn("Supabase not configured");
+    return { success: false, error: new Error("Supabase not configured") };
+  }
+
   try {
     const { data, error } = await supabase
       .from("enrollments")
@@ -69,6 +79,11 @@ export const submitEnrollment = async (enrollment: Enrollment) => {
 
 // Get all inquiries (admin)
 export const getInquiries = async () => {
+  if (!supabase) {
+    console.warn("Supabase not configured");
+    return { success: false, error: new Error("Supabase not configured") };
+  }
+
   try {
     const { data, error } = await supabase
       .from("inquiries")
@@ -85,6 +100,11 @@ export const getInquiries = async () => {
 
 // Get all enrollments (admin)
 export const getEnrollments = async () => {
+  if (!supabase) {
+    console.warn("Supabase not configured");
+    return { success: false, error: new Error("Supabase not configured") };
+  }
+
   try {
     const { data, error } = await supabase
       .from("enrollments")
