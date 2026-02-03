@@ -7,12 +7,14 @@ const hasCredentials = !!(supabaseUrl && supabaseAnonKey);
 
 if (!hasCredentials) {
   console.warn(
-    "⚠️ Supabase credentials not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file to enable database features."
+    "⚠️ Supabase credentials not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file to enable database features.",
   );
 }
 
 // Create client safely - will work if credentials are provided, otherwise gracefully degrade
-export const supabase = hasCredentials ? createClient(supabaseUrl, supabaseAnonKey) : null;
+export const supabase = hasCredentials
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 export type Inquiry = {
   id?: string;

@@ -88,6 +88,7 @@ Visit `http://localhost:5173` and test the contact form. Data should appear in S
 #### Option A: GitHub Integration (Recommended)
 
 1. Push your code to GitHub:
+
    ```bash
    git add .
    git commit -m "Add Supabase integration"
@@ -106,11 +107,13 @@ Visit `http://localhost:5173` and test the contact form. Data should appear in S
 #### Option B: Vercel CLI (Alternative)
 
 1. Install Vercel CLI:
+
    ```bash
    npm install -g vercel
    ```
 
 2. Deploy:
+
    ```bash
    vercel
    ```
@@ -123,6 +126,7 @@ Visit `http://localhost:5173` and test the contact form. Data should appear in S
 ## 📊 Database Structure
 
 ### Inquiries Table
+
 - `id`: Unique identifier
 - `name`: Student name
 - `email`: Student email
@@ -132,6 +136,7 @@ Visit `http://localhost:5173` and test the contact form. Data should appear in S
 - `created_at`: When submitted
 
 ### Enrollments Table
+
 - `id`: Unique identifier
 - `name`: Student name
 - `email`: Student email
@@ -172,16 +177,19 @@ Visit `http://localhost:5173` and test the contact form. Data should appear in S
 ## 🆘 Troubleshooting
 
 **Form not submitting?**
+
 - Check browser console (F12) for errors
 - Verify Supabase credentials in `.env.local`
 - Ensure RLS policies are enabled
 
 **Vercel deployment failing?**
+
 - Check environment variables are set correctly
 - Look at Vercel deployment logs
 - Make sure `.env.local` is in `.gitignore` (don't commit it)
 
 **Can't see data in Supabase?**
+
 - Refresh the table editor
 - Check RLS policies allow INSERT
 - Verify table names match exactly
@@ -191,6 +199,7 @@ Visit `http://localhost:5173` and test the contact form. Data should appear in S
 ## 🎯 Next Steps
 
 After deployment:
+
 1. Test the live form at your Vercel URL
 2. Monitor submissions in Supabase dashboard
 3. Add email notifications (Supabase integrations)
