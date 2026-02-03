@@ -403,47 +403,88 @@ export default function Index() {
 
             <div className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-8 text-white hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 transform hover:scale-105 animate-fade-in-right">
               <h3 className="text-2xl font-bold mb-6">Quick Contact Form</h3>
-              <form className="space-y-4">
-                <div className="group">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 group-focus:border-opacity-50"
-                  />
+              {submitSuccess ? (
+                <div className="flex flex-col items-center justify-center py-8">
+                  <Check className="w-16 h-16 text-white mb-4 animate-bounce" />
+                  <p className="text-lg font-semibold">Inquiry Submitted Successfully!</p>
+                  <p className="text-blue-100 text-sm mt-2">We'll contact you soon.</p>
                 </div>
-                <div className="group">
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 group-focus:border-opacity-50"
-                  />
-                </div>
-                <div className="group">
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 group-focus:border-opacity-50"
-                  />
-                </div>
-                <div className="group">
-                  <select className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 appearance-none cursor-pointer group-focus:border-opacity-50">
-                    <option value="" className="text-gray-900">Select Program</option>
-                    <option value="ras" className="text-gray-900">RAS</option>
-                    <option value="reet" className="text-gray-900">REET</option>
-                    <option value="grade" className="text-gray-900">1st & 2nd Grade</option>
-                    <option value="cet" className="text-gray-900">CET</option>
-                    <option value="psi" className="text-gray-900">PSI</option>
-                  </select>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-white text-blue-600 py-3 rounded-lg font-bold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-2xl"
-                >
-                  Send Inquiry
-                </button>
-              </form>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="group">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 group-focus:border-opacity-50"
+                      required
+                    />
+                  </div>
+                  <div className="group">
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
+                      onChange={handleFormChange}
+                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 group-focus:border-opacity-50"
+                      required
+                    />
+                  </div>
+                  <div className="group">
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone Number"
+                      value={formData.phone}
+                      onChange={handleFormChange}
+                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 group-focus:border-opacity-50"
+                      required
+                    />
+                  </div>
+                  <div className="group">
+                    <select
+                      name="program"
+                      value={formData.program}
+                      onChange={handleFormChange}
+                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:bg-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 appearance-none cursor-pointer group-focus:border-opacity-50"
+                      required
+                    >
+                      <option value="" className="text-gray-900">
+                        Select Program
+                      </option>
+                      <option value="RAS" className="text-gray-900">
+                        RAS
+                      </option>
+                      <option value="REET" className="text-gray-900">
+                        REET
+                      </option>
+                      <option value="1st & 2nd Grade" className="text-gray-900">
+                        1st & 2nd Grade
+                      </option>
+                      <option value="CET" className="text-gray-900">
+                        CET
+                      </option>
+                      <option value="PSI" className="text-gray-900">
+                        PSI
+                      </option>
+                    </select>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-white text-blue-600 py-3 rounded-lg font-bold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Inquiry"}
+                  </button>
+                </form>
+              )}
               <p className="text-blue-100 text-sm mt-4">
-                Or call directly: <a href="tel:8619836193" className="font-bold hover:text-white transition-colors">8619836193</a>
+                Or call directly: <a href="tel:8619836193" className="font-bold hover:text-white transition-colors">
+                  8619836193
+                </a>
               </p>
             </div>
           </div>
