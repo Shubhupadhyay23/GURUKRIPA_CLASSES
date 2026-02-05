@@ -28,6 +28,7 @@ curl -L https://fly.io/install.sh | sh
 ```
 
 Verify:
+
 ```bash
 flyctl version
 ```
@@ -91,15 +92,18 @@ flyctl deploy
 ## Troubleshooting
 
 ### "Supabase not configured" error
+
 - ✅ Did you set both VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY?
 - ✅ Did you redeploy after setting secrets? (`flyctl deploy`)
 - ✅ Wait 2-3 minutes after setting secrets
 
 ### 404 error on routes
+
 - ✅ This is fixed! Server now serves SPA properly
 - ✅ Refresh the page if you see 404
 
 ### Slow deployment
+
 - ✅ First deploy takes 3-5 minutes (normal)
 - ✅ Subsequent deploys are faster
 
@@ -131,6 +135,6 @@ flyctl status
 ✅ **Dockerfile** - Tells Fly how to build your app  
 ✅ **fly.toml** - Configuration for Fly.dev  
 ✅ **server/index.ts** - Updated to serve SPA properly  
-✅ **Environment variables** - Securely stored on Fly.dev  
+✅ **Environment variables** - Securely stored on Fly.dev
 
 Your app is now production-ready! 🚀
